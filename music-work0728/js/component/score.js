@@ -1,0 +1,94 @@
+import { addImgClass } from './addClass.js';
+import { showHint } from '../object/hint.js';
+
+Vue.component('score', {
+	template: '#score-template',
+	props: ['question'],
+	data: function () {
+		return {
+			items: [
+				// 出題内容によって変化する. mounted()で定義
+			],
+			hints: [
+				// 出題内容によって変化する. mounted()で定義
+			],
+			items2: [
+				{ no: 0, name: '全音符', length: 4, className: 'note--whole' },
+				{ no: 1, name: '付点二分音符', length: 3, className: 'note--halfDot' },
+				{ no: 2, name: '二分音符', length: 2, className: 'note--half' },
+				{ no: 3, name: '付点四分音符', length: 1.5, className: 'note--quaterDot' },
+				{ no: 4, name: '四分音符', length: 1, className: 'note--quater' },
+				{ no: 5, name: '八分音符', length: 0.5, className: 'note--eighth' }
+			],
+			leftEnd: 15,
+			rightEnd: 90,
+			ansNum: this.question.ansNum,
+			mess: ""
+		};
+	},
+	mounted() {
+		const NOTES = this.question.notes;
+		// boxの作成
+		for (let i = 0; i < NOTES.length; i++) {
+			this.items.push({ length: NOTES[i], className: addImgClass(NOTES[i], 'note'), boxPos: 20 });
+			this.hints.push({ length: NOTES[i], className: addImgClass(NOTES[i], 'hint'), boxPos: 20 });
+		}
+		// 位置のクラス付与
+		for (let i = 0; i < this.items.length; i++) {
+			const posRange = this.rightEnd - this.leftEnd;
+			const interval = posRange / NOTES.length;
+			this.items[i].boxPos = this.leftEnd + interval * i;
+			this.hints[i].boxPos = this.leftEnd + interval * i;
+
+			// ハテナボックスと被るところは隠す
+			if (i == this.ansNum) {
+				this.items[i].className += "box--border blackbox";
+			}
+		}
+	},
+	methods: {
+		noteClick: function (len) {
+			const answerNote = this.items[this.ansNum];
+			// 正解した時
+			if (answerNote.length == len) {
+				// はてなボックスを消す
+				this.items[this.ansNum].className = this.items[this.ansNum].className.replace(/blackbox/g, '');
+				// テキストの差し替え
+				this.mess = "せいかい！つぎのもんだいに進もう！";
+				showHint(false);
+
+				// ローカルストレージ保存
+
+				// ５題解き終わった時にjsonファイルに書き出す
+			} else {
+				// 不正解の時
+				this.mess = "ざんねん！もういちど考えてみよう"
+				showHint();
+			}
+		},
+	}
+});
+
+new Vue({
+	el: '#score-component',
+	data: {
+		questions: []
+	},
+	mounted() {
+		const getjson = localStorage.getItem('data');
+		let data = JSON.parse(getjson);
+
+		this.questions = data;
+		console.log(this.questions);
+	},
+});
+function swiperBtnClick(option) {
+	console.log("btn click");
+	// ヒントを消す
+	showHint(false);
+	if (option === "next") {
+		console.log("next button");
+	} else if (option === "prev") {
+		console.log("prev button");
+	}
+}

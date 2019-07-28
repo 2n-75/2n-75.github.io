@@ -1,0 +1,48 @@
+@import "../object/mediaquery";
+@import "../foundation/color";
+
+.container {
+  max-width: 900px;
+  margin: 10px auto;
+}
+
+main {
+  .content__inner {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    @include mq-down(md) {
+      width: 90%;
+    }
+  }
+  h3 {
+    margin: 0 10%;
+    color: #555;
+    font-size: 1.2em;
+    padding: 1em 0.5em;
+    @include mq-down(md) {
+      padding: 0.5em 0;
+      font-size: 1em;
+    }
+  }
+}
+
+header {
+  .content__inner {
+    width: 100%;
+    min-height: 65px;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  h1 {
+    font-size: 1.5em;
+    color: $orange;
+    text-align: center;
+    line-height: 40px;
+  }
+}
+
+.swiper-slide__inner {
+  width: 80%;
+  margin: 0 10%;
+}
