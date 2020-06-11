@@ -1,0 +1,12 @@
+@import "./_reset";
+@import "./variables";
+
+/* Common Style */
+/* Atoms*/
+.link{
+  color: $lemon;
+  text-decoration: none;
+  &:hover {
+    color: $mint;
+  }
+}
