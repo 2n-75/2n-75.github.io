@@ -35,7 +35,4 @@ export default Vue.extend({
   display: grid;
   grid-template-columns: minmax(150px, 1fr) 3fr;
 }
-.sideMenu {
-  border: 1px solid $sand;
-}
 </style>

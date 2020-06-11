@@ -1,5 +1,7 @@
 <template>
   <main>
+    <About />
+    <Works />
     <div :is="children"></div>
   </main>
 </template>
