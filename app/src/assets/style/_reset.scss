@@ -17,6 +17,11 @@ h2,
 h3 {
   box-sizing: border-box;
 }
+h1,
+h2,
+h3 {
+  margin: 0;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -59,11 +64,11 @@ button {
   -webkit-appearance: none;
 }
 
-a{
+a {
   font-weight: inherit;
   text-decoration: inherit;
   color: inherit;
-  transition: all .3s;
+  transition: all 0.3s;
   box-sizing: border-box;
   max-height: 99999px;
   backface-visibility: hidden;

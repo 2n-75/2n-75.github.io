@@ -40,7 +40,7 @@ aside {
 .sideMenu__container {
   position: fixed;
   height: 100%;
-  margin: 10px 20px;
+  margin: 40px 20px;
 }
 .sideMenu__item {
   margin: 10px 0;
@@ -53,7 +53,7 @@ aside {
 }
 .sns{
   position: absolute;
-  bottom: 50px;
+  bottom: 80px;
 }
 .sns__text {
   margin-left: 10px;
