@@ -60,11 +60,19 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
   margin-top: 24px;
+  & section {
+    border-radius: 5px;
+    padding: 16px 0;
+  }
 }
 .list {
   text-align: center;
   &__item {
-    margin-left: 16px;
+    width: 60%;
+    margin: 0 auto;
+    padding: 4px;
+    color:$mint;
+    border-bottom: 1px dashed $sand;
   }
 }
 .icon {

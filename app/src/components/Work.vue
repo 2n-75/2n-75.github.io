@@ -1,38 +1,36 @@
 <template>
   <section>
-    <div class="work__container">
-      <div class="work__thumbnail">
-        <img class="work__thumbnail__image" v-bind:src="work.image" alt="サムネイル" />
-        <div
-          class="work__description"
-          v-on:mouseover="onMouseOver"
-          v-on:mouseleave="onMouseLeave"
-          ref="description"
-        >
-          <div class="work__description__content" v-if="isHover">
-            <p class="work__description__text">{{work.description}}</p>
-            <ul v-if="work.lang && isHover" class="tag__list">
-              <li v-for="item in work.lang" :key="item" class="tag">#{{ item }}</li>
-            </ul>
-            <div class="button__wrapper">
-              <a
-                :href="work.youtube"
-                target="_blank"
-                ref="youtube"
-                v-if="work.youtube && isHover"
-                class="button--square"
-              >
-                <font-awesome-icon :icon="['fab', 'youtube']" class="button--square__icon" />動画を見る
-              </a>
-            </div>
+    <div class="work__thumbnail">
+      <img class="work__thumbnail__image" v-bind:src="work.image" alt="サムネイル" />
+      <div
+        class="work__description"
+        v-on:mouseover="onMouseOver"
+        v-on:mouseleave="onMouseLeave"
+        ref="description"
+      >
+        <div class="work__description__content" v-if="isHover">
+          <p class="work__description__text">{{work.description}}</p>
+          <ul v-if="work.lang && isHover" class="tag__list">
+            <li v-for="item in work.lang" :key="item" class="tag">#{{ item }}</li>
+          </ul>
+          <div class="button__wrapper">
+            <a
+              :href="work.youtube"
+              target="_blank"
+              ref="youtube"
+              v-if="work.youtube && isHover"
+              class="button--square"
+            >
+              <font-awesome-icon :icon="['fab', 'youtube']" class="button--square__icon" />動画を見る
+            </a>
           </div>
         </div>
       </div>
-      <h3 class="work__title" v-on:mouseover="onMouseOver" v-on:mouseleave="onMouseLeave">
-        <span class="work__title__label--start" />
-        <span class="work__title__text">{{work.name}}</span>
-      </h3>
     </div>
+    <h3 class="work__title" v-on:mouseover="onMouseOver" v-on:mouseleave="onMouseLeave">
+      <span class="work__title__label--start" />
+      <span class="work__title__text">{{work.name}}</span>
+    </h3>
   </section>
 </template>
 
@@ -67,7 +65,8 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../assets/style/_variables";
-.work__container {
+section {
+  border-radius: 5px;
 }
 .work__title {
   position: relative;
@@ -76,6 +75,7 @@ export default Vue.extend({
   margin: 0;
   padding: 8px;
   background-color: $mint;
+  border-radius: 0 0 5px 5px;
 }
 .work__title__label--start {
   position: absolute;
@@ -86,6 +86,7 @@ export default Vue.extend({
   border-style: solid;
   border-width: 40px 100px 0 0;
   border-color: #f6e335 transparent transparent transparent;
+  border-radius: 0 0 5px 5px;
 }
 .work__title__text {
   position: absolute;
@@ -100,6 +101,7 @@ export default Vue.extend({
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px 5px 0 0;
   }
 }
 .work__description {
@@ -111,6 +113,7 @@ export default Vue.extend({
   -ms-transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
+  border-radius: 5px 5px 0 0;
   &--hover {
     background: rgba($color: $black, $alpha: 0.7);
   }
