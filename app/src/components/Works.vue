@@ -1,17 +1,14 @@
 <template>
   <section>
     <h2 class="work__title">作品紹介</h2>
-    <Work
-      name="Light Factory"
-      :image="lightFactory.image"
-      :description="lightFactory.description"
-    />
-    <Work
-      name="まほうつかいになろう"
-      :image="magic.image"
-      :description="magic.description"
-    />
-    <Work name="AR人狼" :image="jinro.image" :description="jinro.description" />
+    <div class="works__row">
+      <Work :work="lightFactory" />
+      <div />
+      <Work :work="magic" />
+    </div>
+    <div class="works__row">
+      <Work :work="jinro" />
+    </div>
   </section>
 </template>
 
@@ -30,16 +27,26 @@ export default Vue.extend({
   data() {
     return {
       lightFactory: {
+        name: "Light Factory",
         image: LightFactoryImage,
-        description: "lightfactoryの説明"
+        description:
+          "LEDテープの点灯パターンをwebページ上でデザインし制御するシステム。グループ制作・制作期間：約1ヶ月",
+        lang: ["HTML", "CSS", "JavaScript", "PHP", "Arduino"],
+        youtube: "https://www.youtube.com/watch?v=l1XULtuvLic&feature=youtu.be"
       },
       magic: {
+        name: "まほうつかいになろう",
         image: MagicImage,
-        description: "説明"
+        description:
+          "工作とデジタル遊びの融合を目的とした、未就学児向けのコンテンツ。Webカメラで色認識を行い認識した色と同じ色のエフェクトを投影する。個人制作・制作期間：約3ヶ月",
+        lang: ["Unity", "Arduino"]
       },
       jinro: {
+        name: "AR人狼",
         image: JinroImage,
-        description: "人狼"
+        description:
+          "ARマーカーを利用してゲーム内の役職を表示させて遊ぶ人狼ゲーム。自身の役職によって他のユーザーの表示役職が異なって表示されるのが特徴。 グループ制作・制作期間：1ヶ月",
+        lang: ["Processing", "Arduino"]
       }
     };
   }
@@ -48,4 +55,9 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.works__row {
+  display: grid;
+  grid-template-columns: 1fr 0.1fr 1fr;
+  margin-bottom: 40px;
+}
 </style>

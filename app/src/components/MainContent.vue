@@ -27,7 +27,9 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+@import "../assets/style/_variables";
 main{
-  margin:40px;
+  padding: 40px;
+  border-left: 2px solid $mint;
 }
 </style>
