@@ -3,16 +3,23 @@
     <div class="sideMenu__container">
       <h1>PortFolio</h1>
       <ul class="sideMenu__list">
-        <li class="sideMenu__item" v-on:click="onclick('top')">TOP</li>
         <li class="sideMenu__item" v-on:click="onclick('work')">Work</li>
         <li class="sideMenu__item" v-on:click="onclick('about')">About</li>
       </ul>
-      <div>
-        <a href="./" class="link sns">
-          <font-awesome-icon :icon="['fab', 'facebook-square']" />
-          <span class="sns__text">Fackbook</span>
-        </a>
-      </div>
+      <ul class="list--sns">
+        <li class="list--sns__item">
+          <a href="./" class="link sns">
+            <font-awesome-icon :icon="['fab', 'github']" />
+            <span class="sns__text">GitHub</span>
+          </a>
+        </li>
+        <li class="list--sns__item">
+          <a href="./" class="link sns">
+            <font-awesome-icon :icon="['fab', 'facebook-square']" />
+            <span class="sns__text">Fackbook</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </aside>
 </template>
@@ -51,9 +58,12 @@ aside {
     font-weight: $fontBold;
   }
 }
-.sns{
+.list--sns {
   position: absolute;
   bottom: 80px;
+  &__item{
+    margin-bottom: 8px;
+  }
 }
 .sns__text {
   margin-left: 10px;

@@ -55,6 +55,9 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.work__title{
+  margin-bottom: 8px;
+}
 .works__row {
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;

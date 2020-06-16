@@ -2,26 +2,24 @@
   <section>
     <h2>自己紹介</h2>
     <p>大学卒業→フロントエンドエンジニアとして働いています</p>
-    <div>
-      <h3>言語・フレームワーク</h3>
-      <ul>
-        <li>JavaScript</li>
-        <li>TypeScript React</li>
-        <li>Vue.js</li>
-        <li>PHP</li>
-        <li>Python</li>
-        <li>Unity</li>
-        <li>Arduino</li>
-        <li>Processing</li>
-      </ul>
-    </div>
-    <div>
-      <h3>すきなもの</h3>
-      <ul>
-        <li>音楽</li>
-        <li>ゲーム</li>
-        <li>廃墟</li>
-      </ul>
+    <div class="profile__row">
+      <section>
+        <h3>
+          <font-awesome-icon :icon="['fas', 'laptop-code']" class="icon" />言語・フレームワーク
+        </h3>
+        <ul class="list">
+          <li v-for="item in lang" :key="item" class="list__item">{{ item }}</li>
+        </ul>
+      </section>
+      <div />
+      <section>
+        <h3>
+          <font-awesome-icon :icon="['fas', 'heart']" class="icon" />すきなもの
+        </h3>
+        <ul class="list">
+          <li v-for="item in love" :key="item" class="list__item">{{ item }}</li>
+        </ul>
+      </section>
     </div>
   </section>
 </template>
@@ -30,7 +28,22 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "About"
+  name: "About",
+  data() {
+    return {
+      lang: [
+        "JavaScript",
+        "TypeScript React",
+        "Vue.js",
+        "PHP",
+        "Python",
+        "Unity",
+        "Arduino",
+        "Procrssing"
+      ],
+      love: ["音楽", "ゲーム", "廃墟"]
+    };
+  }
 });
 </script>
 
@@ -38,7 +51,23 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "../assets/style/_variables";
 h3 {
-  color: $mint;
+  color: $salmon;
   font-family: $fontFamily;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.profile__row {
+  display: grid;
+  grid-template-columns: 1fr 0.1fr 1fr;
+  margin-top: 24px;
+}
+.list {
+  text-align: center;
+  &__item {
+    margin-left: 16px;
+  }
+}
+.icon {
+  margin-right: 8px;
 }
 </style>

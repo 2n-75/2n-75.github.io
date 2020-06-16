@@ -1,7 +1,11 @@
 <template>
   <main>
-    <About />
-    <Works />
+    <div class="space">
+      <About />
+    </div>
+    <div class="space">
+      <Works />
+    </div>
     <div :is="children"></div>
   </main>
 </template>
@@ -28,8 +32,11 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../assets/style/_variables";
-main{
+main {
   padding: 40px;
   border-left: 1px solid $sand;
+}
+.space {
+  margin-bottom: 80px;
 }
 </style>
