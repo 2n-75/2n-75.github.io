@@ -2,19 +2,29 @@
   <section>
     <div class="work__container">
       <div class="work__thumbnail">
-        <img class="work__thumbnail__image" ref="image" v-bind:src="work.image" alt="サムネイル" />
-        <div class="work__description" v-on:mouseover="onMouseOver" v-on:mouseleave="onMouseLeave">
-          <div class="work__description__content">
-            <p class="work__description__text" v-if="isHover">{{work.description}}</p>
-            <a
-              :href="work.youtube"
-              target="_blank"
-              ref="youtube"
-              v-if="hasMovie && isHover"
-              class="button--square"
-            >
-              <font-awesome-icon :icon="['fab', 'youtube']" class="button--square__icon" />動画を見る
-            </a>
+        <img class="work__thumbnail__image" v-bind:src="work.image" alt="サムネイル" />
+        <div
+          class="work__description"
+          v-on:mouseover="onMouseOver"
+          v-on:mouseleave="onMouseLeave"
+          ref="description"
+        >
+          <div class="work__description__content" v-if="isHover">
+            <p class="work__description__text">{{work.description}}</p>
+            <ul v-if="work.lang && isHover" class="tag__list">
+              <li v-for="item in work.lang" :key="item" class="tag">#{{ item }}</li>
+            </ul>
+            <div class="button__wrapper">
+              <a
+                :href="work.youtube"
+                target="_blank"
+                ref="youtube"
+                v-if="work.youtube && isHover"
+                class="button--square"
+              >
+                <font-awesome-icon :icon="['fab', 'youtube']" class="button--square__icon" />動画を見る
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -36,20 +46,19 @@ export default Vue.extend({
   },
   data() {
     return {
-      hasMovie: false,
       isHover: false
     };
   },
-  created: function() {
-    this.hasMovie = this.$props.work.youtube !== undefined;
-  },
-  mounted: function() {},
   methods: {
     onMouseOver: function() {
       this.isHover = true;
+      const description = this.$refs.description as HTMLDivElement;
+      description.classList.add("work__description--hover");
     },
     onMouseLeave: function() {
       this.isHover = false;
+      const description = this.$refs.description as HTMLDivElement;
+      description.classList.remove("work__description--hover");
     }
   }
 });
@@ -65,7 +74,7 @@ export default Vue.extend({
   width: 100%;
   height: 40px;
   margin: 0;
-  padding: 10px;
+  padding: 8px;
   background-color: $mint;
 }
 .work__title__label--start {
@@ -81,6 +90,7 @@ export default Vue.extend({
 .work__title__text {
   position: absolute;
   z-index: 1;
+  margin-left: 16px;
 }
 .work__thumbnail {
   position: relative;
@@ -101,8 +111,8 @@ export default Vue.extend({
   -ms-transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  &:hover {
-    background: rgba($color: $black, $alpha: 0.6);
+  &--hover {
+    background: rgba($color: $black, $alpha: 0.7);
   }
 
   &__content {
@@ -118,14 +128,29 @@ export default Vue.extend({
     color: #fff;
   }
 }
-.button--square {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid $salmon;
-  background: $salmon;
-  color: #fff;
+.button {
+  &__wrapper {
+    margin: 8px 0;
+  }
+  &--square {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid $salmon;
+    background: $salmon;
+    color: #fff;
+    &__icon {
+      margin-right: 8px;
+    }
+  }
 }
-.button--square__icon {
+.tag__list {
+  margin-bottom: 16px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag {
   margin-right: 8px;
+  color: $sand;
 }
 </style>

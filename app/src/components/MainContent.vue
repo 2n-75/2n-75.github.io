@@ -30,6 +30,6 @@ export default Vue.extend({
 @import "../assets/style/_variables";
 main{
   padding: 40px;
-  border-left: 2px solid $mint;
+  border-left: 1px solid $sand;
 }
 </style>
