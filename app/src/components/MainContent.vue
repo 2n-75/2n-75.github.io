@@ -7,7 +7,6 @@
       <div class="space">
         <About />
       </div>
-      <div :is="children"></div>
     </div>
   </main>
 </template>
@@ -26,7 +25,13 @@ export default Vue.extend({
     Works
   },
   props: {
-    children: String
+    activeContent: String
+  },
+  computed:{
+    scrollToActiveContent: function(){
+      console.log(this.activeContent)
+      window.scrollTo( 0, 1000 );
+    }
   }
 });
 </script>
@@ -35,7 +40,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "../assets/style/_variables";
 main {
-  border-left: 1px solid $sand;
+  border-left: 1px solid $lemon;
 }
 .main__container {
   margin: 40px;

@@ -2,9 +2,17 @@
   <aside class="sideMenu">
     <div class="sideMenu__container">
       <h1>PortFolio</h1>
-      <ul class="sideMenu__list">
-        <li class="sideMenu__item" v-on:click="onclick('work')">Work</li>
-        <li class="sideMenu__item" v-on:click="onclick('about')">About</li>
+      <ul class="sideMenu__list" v-if="setActive">
+        <li class="sideMenu__item sideMenu__item--active" ref="work" @click="onClick('work')">Work</li>
+        <li class="sideMenu__item" ref="about" @click="onClick('about')">About</li>
+      </ul>
+      <ul class="sideMenu__list" v-else>
+        <li class="sideMenu__item" ref="work" @click="onClick('work')">Work</li>
+        <li
+          class="sideMenu__item sideMenu__item--active"
+          ref="about"
+          @click="onClick('about')"
+        >About</li>
       </ul>
       <ul class="list--sns">
         <li class="list--sns__item">
@@ -29,9 +37,16 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "SideMenu",
-  methods: {
-    onclick: function(name: string) {
-      console.log(name);
+  props: {
+    onClick: Function,
+    activeContent: String
+  },
+  computed: {
+    setActive: function() {
+      if (!this.activeContent) {
+        return true;
+      }
+      return this.activeContent === "work";
     }
   }
 });
@@ -54,6 +69,10 @@ aside {
   font-size: 1.2em;
   &:hover {
     cursor: pointer;
+    color: $lemon;
+    font-weight: $fontBold;
+  }
+  &--active {
     color: $mint;
     font-weight: $fontBold;
   }
@@ -61,7 +80,7 @@ aside {
 .list--sns {
   position: absolute;
   bottom: 80px;
-  &__item{
+  &__item {
     margin-bottom: 8px;
   }
 }

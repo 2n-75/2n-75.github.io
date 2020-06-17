@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-      <side-menu />
-      <main-content children="hello-world" />
+      <side-menu :onClick="onClick" :activeContent="clickedName"/>
+      <main-content :activeContent="clickedName"/>
     </div>
   </div>
 </template>
@@ -15,13 +15,21 @@ import MainContent from "./components/MainContent.vue";
 
 export default Vue.extend({
   name: "App",
-  data: {
-    children: String
+  data() {
+    return {
+      clickedName: ""
+    };
   },
   components: {
     HelloWorld,
     SideMenu,
     MainContent
+  },
+  methods: {
+    onClick: function(name: string) {
+      this.clickedName = name;
+      window.scrollTo( 0, 1000 );
+    }
   }
 });
 </script>
