@@ -1,12 +1,14 @@
 <template>
   <main>
-    <div class="space">
-      <About />
+    <div class="main__container">
+      <div class="space">
+        <Works />
+      </div>
+      <div class="space">
+        <About />
+      </div>
+      <div :is="children"></div>
     </div>
-    <div class="space">
-      <Works />
-    </div>
-    <div :is="children"></div>
   </main>
 </template>
 
@@ -33,8 +35,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "../assets/style/_variables";
 main {
-  padding: 40px;
   border-left: 1px solid $sand;
+}
+.main__container {
+  margin: 40px;
 }
 .space {
   margin-bottom: 80px;

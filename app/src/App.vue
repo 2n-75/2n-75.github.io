@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <side-menu />
-      <main-content children="hello-world"/>
+      <main-content children="hello-world" />
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default Vue.extend({
 
 <style lang="scss">
 @import "./assets/style/main";
+
 #app {
   color: $black;
 }

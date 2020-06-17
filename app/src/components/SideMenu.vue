@@ -8,13 +8,13 @@
       </ul>
       <ul class="list--sns">
         <li class="list--sns__item">
-          <a href="./" class="link sns">
+          <a href="https://github.com/2n-75" class="link sns">
             <font-awesome-icon :icon="['fab', 'github']" />
             <span class="sns__text">GitHub</span>
           </a>
         </li>
         <li class="list--sns__item">
-          <a href="./" class="link sns">
+          <a href="https://www.facebook.com/kanako.katsumata.792" class="link sns">
             <font-awesome-icon :icon="['fab', 'facebook-square']" />
             <span class="sns__text">Fackbook</span>
           </a>
@@ -66,6 +66,6 @@ aside {
   }
 }
 .sns__text {
-  margin-left: 10px;
+  margin-left: 8px;
 }
 </style>
