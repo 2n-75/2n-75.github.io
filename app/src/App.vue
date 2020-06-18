@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-      <side-menu :onClick="onClick" :activeContent="clickedName"/>
-      <main-content :activeContent="clickedName"/>
+      <side-menu :onClick="onClick" :activeContentName="activeContentName" />
+      <main-content :activeContentName="activeContentName" ref="main" />
     </div>
   </div>
 </template>
@@ -17,7 +17,9 @@ export default Vue.extend({
   name: "App",
   data() {
     return {
-      clickedName: ""
+      changed: false,
+      byClick: false,
+      activeContentName: ""
     };
   },
   components: {
@@ -25,10 +27,38 @@ export default Vue.extend({
     SideMenu,
     MainContent
   },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+    this.changed = false;
+  },
+  mounted() {
+    const mainContent = this.$refs.main as Vue;
+    //mainContent.$el.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    const mainContent = this.$refs.main as Vue;
+    //mainContent.$el.removeEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
-    onClick: function(name: string) {
-      this.clickedName = name;
-      window.scrollTo( 0, 1000 );
+    onClick(name: string, event: any) {
+      this.changed = false;
+      this.changeActiveContent(true, name);
+      event.preventDefault();
+    },
+    handleScroll(event: any) {
+      !this.changed && this.changeActiveContent(false, undefined);
+      event.preventDefault();
+    },
+    changeActiveContent(byClick: boolean, name?: string) {
+      if (byClick) {
+        this.activeContentName = name || "works";
+        this.changed = true;
+      }else{
+        this.activeContentName = window.pageYOffset > 600 ? "about" : "works";
+      }
     }
   }
 });

@@ -3,15 +3,19 @@
     <div class="sideMenu__container">
       <h1>PortFolio</h1>
       <ul class="sideMenu__list" v-if="setActive">
-        <li class="sideMenu__item sideMenu__item--active" ref="work" @click="onClick('work')">Work</li>
-        <li class="sideMenu__item" ref="about" @click="onClick('about')">About</li>
+        <li
+          class="sideMenu__item sideMenu__item--active"
+          ref="work"
+          @click="onClick('works', $event)"
+        >Work</li>
+        <li class="sideMenu__item" ref="about" @click="onClick('about', $event)">About</li>
       </ul>
       <ul class="sideMenu__list" v-else>
-        <li class="sideMenu__item" ref="work" @click="onClick('work')">Work</li>
+        <li class="sideMenu__item" ref="work" @click="onClick('works', $event)">Works</li>
         <li
           class="sideMenu__item sideMenu__item--active"
           ref="about"
-          @click="onClick('about')"
+          @click="onClick('about', $event)"
         >About</li>
       </ul>
       <ul class="list--sns">
@@ -39,14 +43,14 @@ export default Vue.extend({
   name: "SideMenu",
   props: {
     onClick: Function,
-    activeContent: String
+    activeContentName: String
   },
   computed: {
-    setActive: function() {
-      if (!this.activeContent) {
+    setActive() {
+      if (!this.activeContentName) {
         return true;
       }
-      return this.activeContent === "work";
+      return this.activeContentName === "works";
     }
   }
 });

@@ -2,10 +2,10 @@
   <main>
     <div class="main__container">
       <div class="space">
-        <Works />
+        <Works ref="works" />
       </div>
       <div class="space">
-        <About />
+        <About ref="about" />
       </div>
     </div>
   </main>
@@ -25,12 +25,18 @@ export default Vue.extend({
     Works
   },
   props: {
-    activeContent: String
+    activeContentName: String,
+    handleScroll: Function
   },
-  computed:{
-    scrollToActiveContent: function(){
-      console.log(this.activeContent)
-      window.scrollTo( 0, 1000 );
+  watch: {
+    activeContentName() {
+      this.scrollToActiveElement();
+    }
+  },
+  methods: {
+    scrollToActiveElement() {
+      const activeElement = this.$refs[this.activeContentName] as Vue;
+      activeElement.$el.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }
 });
