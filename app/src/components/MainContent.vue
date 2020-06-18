@@ -30,13 +30,15 @@ export default Vue.extend({
   },
   watch: {
     activeContentName() {
-      this.scrollToActiveElement();
+      this.scrollToActiveElement(event);
     }
   },
   methods: {
-    scrollToActiveElement() {
+    scrollToActiveElement(event: any) {
       const activeElement = this.$refs[this.activeContentName] as Vue;
       activeElement.$el.scrollIntoView({ behavior: "smooth", block: "center" });
+      const parent = this.$parent as Vue;
+      event && event.preventDefault();
     }
   }
 });

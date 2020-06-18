@@ -17,7 +17,7 @@ export default Vue.extend({
   name: "App",
   data() {
     return {
-      changed: false,
+      timeout: 0,
       byClick: false,
       activeContentName: ""
     };
@@ -29,36 +29,22 @@ export default Vue.extend({
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
-    this.changed = false;
-  },
-  mounted() {
-    const mainContent = this.$refs.main as Vue;
-    //mainContent.$el.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    const mainContent = this.$refs.main as Vue;
-    //mainContent.$el.removeEventListener("scroll", this.handleScroll);
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     onClick(name: string, event: any) {
-      this.changed = false;
-      this.changeActiveContent(true, name);
-      event.preventDefault();
+      this.activeContentName = name;
     },
-    handleScroll(event: any) {
-      !this.changed && this.changeActiveContent(false, undefined);
-      event.preventDefault();
-    },
-    changeActiveContent(byClick: boolean, name?: string) {
-      if (byClick) {
-        this.activeContentName = name || "works";
-        this.changed = true;
-      }else{
-        this.activeContentName = window.pageYOffset > 600 ? "about" : "works";
-      }
+    handleScroll() {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(
+        function() {
+          this.activeContentName = window.pageYOffset > 600 ? "about" : "works";
+        }.bind(this),
+        500
+      );
     }
   }
 });
