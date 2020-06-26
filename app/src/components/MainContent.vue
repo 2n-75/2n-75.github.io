@@ -46,12 +46,17 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "../assets/style/_variables";
+@import "../assets/style/main";
 main {
-  border-left: 1px solid $lemon;
+  @include mq-up() {
+    border-left: 1px solid $lemon;
+  }
 }
 .main__container {
   margin: 40px;
+  @include mq-down() {
+    margin: 40px 20px;
+  }
 }
 .space {
   margin-bottom: 80px;

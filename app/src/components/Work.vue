@@ -64,9 +64,13 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "../assets/style/_variables";
+@import "../assets/style/main";
+
 section {
   border-radius: 5px;
+  @include mq-down() {
+    margin-bottom: 40px;
+  }
 }
 .work__title {
   position: relative;

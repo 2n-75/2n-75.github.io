@@ -1,46 +1,39 @@
 <template>
-  <aside class="sideMenu">
+  <aside>
     <div class="sideMenu__container">
-      <h1>PortFolio</h1>
-      <ul class="sideMenu__list" v-if="setActive">
-        <li
-          class="sideMenu__item sideMenu__item--active"
-          ref="work"
-          @click="onClick('works', $event)"
-        >Work</li>
-        <li class="sideMenu__item" ref="about" @click="onClick('about', $event)">About</li>
-      </ul>
-      <ul class="sideMenu__list" v-else>
-        <li class="sideMenu__item" ref="work" @click="onClick('works', $event)">Works</li>
-        <li
-          class="sideMenu__item sideMenu__item--active"
-          ref="about"
-          @click="onClick('about', $event)"
-        >About</li>
-      </ul>
-      <ul class="list--sns">
-        <li class="list--sns__item">
-          <a href="https://github.com/2n-75" class="link sns">
-            <font-awesome-icon :icon="['fab', 'github']" />
-            <span class="sns__text">GitHub</span>
-          </a>
-        </li>
-        <li class="list--sns__item">
-          <a href="https://www.facebook.com/kanako.katsumata.792" class="link sns">
-            <font-awesome-icon :icon="['fab', 'facebook-square']" />
-            <span class="sns__text">Fackbook</span>
-          </a>
-        </li>
-      </ul>
+      <div class="sideMenu__header">
+        <h1>PortFolio</h1>
+        <ul class="sideMenu__list" v-if="setActive">
+          <li
+            class="sideMenu__item sideMenu__item--active"
+            ref="work"
+            @click="onClick('works', $event)"
+          >Work</li>
+          <li class="sideMenu__item" ref="about" @click="onClick('about', $event)">About</li>
+        </ul>
+        <ul class="sideMenu__list" v-else>
+          <li class="sideMenu__item" ref="work" @click="onClick('works', $event)">Works</li>
+          <li
+            class="sideMenu__item sideMenu__item--active"
+            ref="about"
+            @click="onClick('about', $event)"
+          >About</li>
+        </ul>
+      </div>
+      <SNSList class="sns" />
     </div>
   </aside>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import SNSList from "./SNSList.vue";
 
 export default Vue.extend({
   name: "SideMenu",
+  components: {
+    SNSList
+  },
   props: {
     onClick: Function,
     activeContentName: String
@@ -60,17 +53,40 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "../assets/style/main";
 
-aside {
-  height: 100vh;
-}
 .sideMenu__container {
-  position: fixed;
-  height: 100%;
-  margin: 40px 20px;
+  @include mq-up() {
+    position: fixed;
+    height: 100%;
+    margin: 40px 20px;
+  }
+  margin: 0;
+  padding: 20px;
+  background: #fff;
+}
+.sideMenu__header {
+  @include mq-down() {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) 3fr;
+    & h1{
+      margin: auto 0;
+    }
+  }
+}
+.sideMenu__list {
+  @include mq-down() {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .sideMenu__item {
   margin: 10px 0;
   font-size: 1.2em;
+  @include mq-down() {
+    text-align: center;
+  }
   &:hover {
     cursor: pointer;
     color: $lemon;
@@ -81,14 +97,9 @@ aside {
     font-weight: $fontBold;
   }
 }
-.list--sns {
-  position: absolute;
-  bottom: 80px;
-  &__item {
-    margin-bottom: 8px;
+.sns {
+  @include mq-down() {
+    display: none;
   }
-}
-.sns__text {
-  margin-left: 8px;
 }
 </style>

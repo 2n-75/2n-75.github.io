@@ -2,20 +2,7 @@
   <section>
     <h2>自己紹介</h2>
     <p>大学卒業→フロントエンドエンジニアとして働いています</p>
-    <ul class="list--sns">
-        <li class="list--sns__item">
-          <a href="https://github.com/2n-75" class="link sns">
-            <font-awesome-icon :icon="['fab', 'github']" />
-            <span class="sns__text">GitHub</span>
-          </a>
-        </li>
-        <li class="list--sns__item">
-          <a href="https://www.facebook.com/kanako.katsumata.792" class="link sns">
-            <font-awesome-icon :icon="['fab', 'facebook-square']" />
-            <span class="sns__text">Fackbook</span>
-          </a>
-        </li>
-      </ul>
+    <SNSList class="sns" />
     <div class="profile__row">
       <section>
         <h3>
@@ -40,9 +27,13 @@
 
 <script lang="ts">
 import Vue from "vue";
+import SNSList from "./SNSList.vue";
 
 export default Vue.extend({
   name: "About",
+  components: {
+    SNSList
+  },
   data() {
     return {
       lang: [
@@ -63,7 +54,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "../assets/style/_variables";
+@import "../assets/style/main";
 
 h3 {
   color: $salmon;
@@ -77,6 +68,11 @@ h3 {
 .profile__row {
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
+  @include mq-down() {
+    display: inline-block;
+    width: 100%;
+    margin: 10px auto;
+  }
   margin-top: 16px;
   & section {
     border-radius: 5px;
@@ -95,13 +91,9 @@ h3 {
   }
 }
 
-.list--sns {
-  display: flex;
-  &__item {
-    margin-right: 16px;
+.sns{
+  @include mq-up() {
+    display: none;
   }
-}
-.sns__text {
-  margin-left: 8px;
 }
 </style>
