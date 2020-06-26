@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <side-menu :onClick="onClick" :activeContentName="activeContentName" class="sideMenu" />
-      <main-content :activeContentName="activeContentName" ref="main" class="main" />
+      <main-content :activeContentName="activeContentName" :isSp="isSp" ref="main" class="main" />
       <footer class="footer">
         <SNSList />
       </footer>
@@ -23,7 +23,9 @@ export default Vue.extend({
     return {
       timeout: 0,
       byClick: false,
-      activeContentName: ""
+      activeContentName: "",
+      toggleValue: 600,
+      isSp: false
     };
   },
   components: {
@@ -34,6 +36,9 @@ export default Vue.extend({
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
+    const userAgent = navigator.userAgent;
+    this.isSp = this.checkIsSp(userAgent);
+    this.toggleValue = this.checkIsSp(userAgent) ? 1100 : 600;
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -46,10 +51,21 @@ export default Vue.extend({
       clearTimeout(this.timeout);
       this.timeout = setTimeout(
         function() {
-          this.activeContentName = window.pageYOffset > 600 ? "about" : "works";
+          this.activeContentName =
+            window.pageYOffset > this.toggleValue ? "about" : "works";
         }.bind(this),
         500
       );
+    },
+    checkIsSp: function(userAgent: String) {
+      if (
+        (userAgent.indexOf("iPhone") > 0 || userAgent.indexOf("android") > 0) &&
+        navigator.userAgent.indexOf("Mobile") > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });

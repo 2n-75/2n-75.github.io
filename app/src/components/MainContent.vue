@@ -26,7 +26,8 @@ export default Vue.extend({
   },
   props: {
     activeContentName: String,
-    handleScroll: Function
+    handleScroll: Function,
+    isSp: Boolean
   },
   watch: {
     activeContentName() {
@@ -35,10 +36,15 @@ export default Vue.extend({
   },
   methods: {
     scrollToActiveElement(event: any) {
-      const activeElement = this.$refs[this.activeContentName] as Vue;
-      activeElement.$el.scrollIntoView({ behavior: "smooth", block: "center" });
-      const parent = this.$parent as Vue;
-      event && event.preventDefault();
+      if (!this.isSp) {
+        const activeElement = this.$refs[this.activeContentName] as Vue;
+        activeElement.$el.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+        const parent = this.$parent as Vue;
+        event && event.preventDefault();
+      }
     }
   }
 });
