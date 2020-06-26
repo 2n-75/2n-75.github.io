@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-scroll="handleScroll">
     <h2 class="work__title">作品紹介</h2>
     <div class="works__row">
       <Work :work="lightFactory" />
@@ -49,6 +49,15 @@ export default Vue.extend({
         lang: ["Processing", "Arduino"]
       }
     };
+  },
+  methods: {
+    handleScroll: function(evt) {
+      console.log("hogoe")
+      if (window.scrollY > 50) {
+        console.log("scroll")
+      }
+      return window.scrollY > 100;
+    }
   }
 });
 </script>

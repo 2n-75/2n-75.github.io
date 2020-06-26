@@ -81,8 +81,8 @@ export default Vue.extend({
     margin-top: 100px;
   }
 }
-.footer{
-  @include mq-up(){
+.footer {
+  @include mq-up() {
     display: none;
   }
   @include mq-down() {

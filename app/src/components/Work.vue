@@ -57,6 +57,16 @@ export default Vue.extend({
       this.isHover = false;
       const description = this.$refs.description as HTMLDivElement;
       description.classList.remove("work__description--hover");
+    },
+    isSp: function(userAgent: String) {
+      if (
+        (userAgent.indexOf("iPhone") > 0 || userAgent.indexOf("android") > 0) &&
+        navigator.userAgent.indexOf("Mobile") > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });
